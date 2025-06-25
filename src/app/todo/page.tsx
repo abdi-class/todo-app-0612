@@ -116,6 +116,10 @@ function TodoPage() {
     });
   }
 
+  function onHandleTheme() {
+    localStorage.setItem("mode", "dark");
+  }
+
   return (
     <div>
       <div
@@ -124,7 +128,13 @@ function TodoPage() {
       >
         <div className="w-[40rem] m-auto flex justify-between items-center">
           <h1 className="text-4xl font-bold text-white">Todo</h1>
-          <Button variant="ghost" className="cursor-pointer" size="icon">
+          <p>Theme mode: {localStorage.getItem("mode")}</p>
+          <Button
+            variant="ghost"
+            className="cursor-pointer"
+            size="icon"
+            onClick={onHandleTheme}
+          >
             <Moon size={24} color="white" />
           </Button>
         </div>

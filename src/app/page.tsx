@@ -7,7 +7,8 @@ export default function Home() {
 
   return (
     <div>
-      <div className="h-screen flex flex-col gap-10 items-center justify-center">
+      <div className="h-screen flex flex-col gap-10 items-center justify-center dark:bg-gray-600">
+        <p>Theme mode: {localStorage.getItem("mode")}</p>
         <div className="text-center">
           <h1 className="text-4xl font-semibold">Welcome to Todo App</h1>
           <p className="font-light">
