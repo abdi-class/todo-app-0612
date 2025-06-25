@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Moon, Trash } from "lucide-react";
-import { useRef, useState } from "react";
+import { Moon, Sun, Trash } from "lucide-react";
+import { useContext, useRef, useState } from "react";
 import TaskList from "./component/TaskList";
+import { ThemeContext } from "@/contexts/ThemeContext";
+import Link from "next/link";
 
 interface ITask {
   id: number;
@@ -14,6 +16,8 @@ interface ITask {
 }
 
 function TodoPage() {
+  // use context
+  const { modeContext, setModeContext } = useContext(ThemeContext);
   // tate for store data task
   const [taskList, setTaskList] = useState<ITask[]>([]);
   const inTaskRef = useRef<HTMLInputElement>(null);
@@ -116,10 +120,6 @@ function TodoPage() {
     });
   }
 
-  function onHandleTheme() {
-    localStorage.setItem("mode", "dark");
-  }
-
   return (
     <div>
       <div
@@ -127,15 +127,26 @@ function TodoPage() {
         className="h-48 pt-12 relative bg-gradient-to-b from-purple-500"
       >
         <div className="w-[40rem] m-auto flex justify-between items-center">
-          <h1 className="text-4xl font-bold text-white">Todo</h1>
-          <p>Theme mode: {localStorage.getItem("mode")}</p>
+          <Link href="/">
+            <h1 className="text-4xl font-bold text-white dark:text-red-600">
+              Todo
+            </h1>
+          </Link>
+          <p>Theme mode: {modeContext}</p>
           <Button
             variant="ghost"
             className="cursor-pointer"
             size="icon"
-            onClick={onHandleTheme}
+            onClick={() => {
+              setModeContext(modeContext === "light" ? "dark" : "light");
+              document.body.classList.toggle("dark");
+            }}
           >
-            <Moon size={24} color="white" />
+            {modeContext === "dark" ? (
+              <Sun size={24} color="white" />
+            ) : (
+              <Moon size={24} color="white" />
+            )}
           </Button>
         </div>
       </div>

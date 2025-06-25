@@ -1,3 +1,4 @@
+"use client";
 import { createContext, ReactNode, useState } from "react";
 
 interface IThemeContext {
@@ -6,7 +7,7 @@ interface IThemeContext {
 }
 
 export const ThemeContext = createContext<IThemeContext>({
-  modeContext: "",
+  modeContext: "light",
   setModeContext: () => {},
 });
 
@@ -15,7 +16,7 @@ interface IThemeProvider {
 }
 
 function ThemeProvider(props: IThemeProvider) {
-  const [mode, setMode] = useState<string>("");
+  const [mode, setMode] = useState<string>("light");
 
   return (
     <ThemeContext value={{ modeContext: mode, setModeContext: setMode }}>
