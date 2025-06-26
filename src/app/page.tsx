@@ -21,9 +21,14 @@ export default function Home() {
             Get started to list your daily activities
           </p>
         </div>
-        <Button type="button" onClick={() => router.push("/todo")}>
-          Type Todo
-        </Button>
+        <div>
+          <Button type="button" onClick={() => router.push("/todo")}>
+            Type Todo
+          </Button>
+          <Button type="button" onClick={() => router.push("/signup")}>
+            Signup
+          </Button>
+        </div>
       </div>
     </div>
   );
