@@ -15,9 +15,9 @@ function SignUpPage() {
       // - Pastikan semua form input diisi
       // - Jika ada yang kosong beri alert
       if (
-        inUsernameRef.current?.value ||
-        inEmailRef.current?.value ||
-        inPasswordRef.current?.value
+        inUsernameRef.current?.value === "" ||
+        inEmailRef.current?.value === "" ||
+        inPasswordRef.current?.value === ""
       ) {
         alert("Isi semua form");
       } else {
