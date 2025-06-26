@@ -2,12 +2,40 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import { useRef } from "react";
 
 function SignUpPage() {
   const inUsernameRef = useRef<HTMLInputElement>(null);
   const inEmailRef = useRef<HTMLInputElement>(null);
   const inPasswordRef = useRef<HTMLInputElement>(null);
+
+  async function onBtSignup() {
+    try {
+      // - Pastikan semua form input diisi
+      // - Jika ada yang kosong beri alert
+      if (
+        inUsernameRef.current?.value ||
+        inEmailRef.current?.value ||
+        inPasswordRef.current?.value
+      ) {
+        alert("Isi semua form");
+      } else {
+        // - Jika ada datanya maka submit ke backendless lewat axios
+        const response = await axios.post(
+          "https://festalplane-us.backendless.app/api/data/accounts",
+          {
+            username: inUsernameRef.current?.value,
+            email: inEmailRef.current?.value,
+            password: inPasswordRef.current?.value,
+          }
+        );
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
