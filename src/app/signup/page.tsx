@@ -62,7 +62,7 @@ function SignUpPage() {
               ref={inPasswordRef}
             />
           </div>
-          <Button type="button" className="w-full">
+          <Button type="button" className="w-full" onClick={onBtSignup}>
             Submit
           </Button>
         </CardContent>
