@@ -8,6 +8,8 @@ import { useContext, useRef, useState } from "react";
 import TaskList from "./component/TaskList";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hook";
+import { setMode } from "@/lib/redux/features/themeSlice";
 
 interface ITask {
   id: number;
@@ -17,7 +19,13 @@ interface ITask {
 
 function TodoPage() {
   // use context
-  const { modeContext, setModeContext } = useContext(ThemeContext);
+  // const { modeContext, setModeContext } = useContext(ThemeContext);
+  // use Redux
+  // Menjalankan fungsi action dengan dispatch
+  const dispatch = useAppDispatch();
+  // Mengambil nilai dari reducer
+  const mode = useAppSelector((state) => state.themeReducer.mode);
+
   // tate for store data task
   const [taskList, setTaskList] = useState<ITask[]>([]);
   const inTaskRef = useRef<HTMLInputElement>(null);
@@ -132,17 +140,17 @@ function TodoPage() {
               Todo
             </h1>
           </Link>
-          <p>Theme mode: {modeContext}</p>
+          <p>Theme mode: {mode}</p>
           <Button
             variant="ghost"
             className="cursor-pointer"
             size="icon"
             onClick={() => {
-              setModeContext(modeContext === "light" ? "dark" : "light");
+              dispatch(setMode(mode === "light" ? "dark" : "light"));
               document.body.classList.toggle("dark");
             }}
           >
-            {modeContext === "dark" ? (
+            {mode === "dark" ? (
               <Sun size={24} color="white" />
             ) : (
               <Moon size={24} color="white" />
